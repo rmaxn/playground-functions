@@ -38,23 +38,24 @@ console.log(footballPoints(0, 0)); // 0
 
 // Desafio 6
 const highestValue = (values) => {
-  let maiorItem = values[0];
-  for (let key of values) {
-    if (key > maiorItem) {
-      maiorItem = key;
+  const highest = values.reduce((a, b) => {
+    if (a < b) {
+      a = b;
     }
-  }
-  return maiorItem;
+    return a;
+  });
+  return highest;
 };
 
 function highestCount(values) {
-  let repeticoes = 0;
-  for (let key of values) {
-    if (key === highestValue(values)) {
-      repeticoes += 1;
+  let highest = highestValue(values);
+  let count = 0;
+  values.forEach((value) => {
+    if (value === highest) {
+      count += 1;
     }
-  }
-  return repeticoes;
+  });
+  return count;
 }
 
 console.log(highestCount([9, 1, 2, 3, 9, 5, 7])); // 2
@@ -62,7 +63,6 @@ console.log(highestCount([0, 4, 4, 4, 9, 2, 1])); // 1
 console.log(highestCount([0, 0, 0])); // 3
 
 // Desafio 7
-// Usado como referência: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Math/abs
 const catAndMouse = (mouse, cat1, cat2) => {
   let d1 = Math.abs(cat1 - mouse);
   let d2 = Math.abs(cat2 - mouse);
@@ -70,7 +70,8 @@ const catAndMouse = (mouse, cat1, cat2) => {
     return 'cat1';
   } if (d2 < d1) {
     return 'cat2';
-  } return 'os gatos trombam e o rato foge';
+  }
+  return 'os gatos trombam e o rato foge';
 };
 
 console.log(catAndMouse(0, 3, 2)); // cat2
